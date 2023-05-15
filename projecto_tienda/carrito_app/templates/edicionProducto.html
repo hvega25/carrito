@@ -1,0 +1,38 @@
+{% extends "./base.html" %}
+
+{% block title %} Carreto {% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+
+        <h2>Editar carrito </h2>
+
+<div class="card">
+    <div class="card-body">
+        <form action="/editarProducto/" method="POST"> {% csrf_token %}
+            <div class="form-group">
+                <input type="text" id="txtNombre" name="txtNombre" value="{{ prod.nombre}}" class="form-control" placeholder="Nombre" minlength="3" maxlength="10" readonly required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="{{ prod.descripcion}}" placeholder="Descripcion" minlength="3" maxlength="10" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="numPrecio" name="numPrecio" class="form-control"  value="{{ prod.precio}}" placeholder="Precio" minlength="1" maxlength="20" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="numCantidad" name="numCantidad" class="form-control" value="{{ prod.cantidad}}" placeholder="Cantidad" minlength="1" maxlength="20" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtMetodo" name="txtMetodo" class="form-control" value="{{ prod.metodo_envio}}" placeholder="Método de envio" minlength="3" maxlength="10" required>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block text-white" >Editar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    </div>
+</div>
+{% endblock %}

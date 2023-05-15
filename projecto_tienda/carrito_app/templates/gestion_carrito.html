@@ -1,0 +1,74 @@
+{% extends "./base.html" %}
+
+{% block title %} Carreto {% endblock %}
+{% block body %}
+<div class="row">
+<div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+
+<h2>Agregar a carrito </h2>
+
+<div class="card">
+    <div class="card-body">
+        <form action="/registroProducto/" method="POST"> {% csrf_token %}
+            <div class="form-group">
+                <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" minlength="3" maxlength="10" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" placeholder="Descripcion" minlength="3" maxlength="10" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="numPrecio" name="numPrecio" class="form-control" placeholder="Precio" minlength="1" maxlength="20" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="numCantidad" name="numCantidad" class="form-control" placeholder="Cantidad" minlength="1" maxlength="20" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="txtMetodo" name="txtMetodo" class="form-control" placeholder="Método de envio" minlength="3" maxlength="10" required>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block text-white" >Agregar</button>
+            </div>
+        </form>
+
+        <form action="/eliminarTodosLosProductos/" method="POST"> {% csrf_token %}
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger" >Elimiar carrito</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Método de envio</th>
+                <th colspan="2"> Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in prod %}
+            <tr>
+                <td>{{ c.nombre }}</td>
+                <td>{{ c.descripcion }}</td>
+                <td>{{ c.precio }}</td>
+                <td>{{ c.cantidad }}</td>
+                <td>{{ c.metodo_envio }}</td>
+                <td> <a href="edicionProducto/{{c.nombre}}" class="btn btn-info">Editar</a></td>
+                <td> <a href="eliminarProducto/{{c.nombre}}"class="btn btn-danger" >Eliminar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+</div>
+</div>
+{% endblock %}
